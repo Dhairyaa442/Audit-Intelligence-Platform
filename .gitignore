@@ -1,0 +1,31 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Environment Variables
+.env
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Python Cache
+.pytest_cache/
+
+# Next.js
+frontend/node_modules/
+frontend/.next/
+
+# Build Files
+dist/
+build/
+
+# Coverage
+.coverage
+htmlcov/

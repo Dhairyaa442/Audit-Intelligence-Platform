@@ -1,0 +1,251 @@
+policy_id,policy_name,department,owner,approval_status,last_review_date,expiry_date,document_version,risk_category,audit_status,finding_count,critical_findings,compliance_score
+P001,Data Retention Policy,IT,Emily Garcia,Approved,2024-04-24,2025-12-08,v5.1,Legal & Regulatory,Compliant,2,0,98
+P002,Vendor Security Policy,Operations,John Brown,Approved,2024-12-17,2025-07-06,v5.6,Financial Controls,Compliant,0,0,90
+P003,Regulatory Compliance Policy,Operations,Emily Smith,Pending,2025-12-06,2027-09-25,v2.5,Cybersecurity,At Risk,3,0,76
+P004,Procurement Policy,IT,Emma White,Pending,2024-09-07,2026-11-05,v4.1,Legal & Regulatory,Non-Compliant,10,1,57
+P005,Litigation Response Policy,HR,James Allen,Approved,2026-03-08,2025-08-14,v3.1,Financial Controls,Compliant,0,0,97
+P006,Procurement Policy,IT,Emily Harris,Approved,2025-05-10,2026-04-11,v3.1,Legal & Regulatory,At Risk,3,0,78
+P007,Records Retention Policy,Finance,Nancy Martin,Approved,2025-08-15,2028-06-26,v2.0,HR Compliance,Non-Compliant,8,1,69
+P008,Employee Onboarding Policy,Operations,Michael Patel,Rejected,2024-10-15,2027-02-16,v4.2,HR Compliance,Non-Compliant,10,4,68
+P009,Accounts Payable Review,Finance,Matthew Hall,Approved,2024-09-27,2027-10-07,v3.3,Financial Controls,Compliant,1,0,92
+P010,Supplier Assessment Policy,Legal,Michael Lee,Pending,2025-12-13,2026-04-05,v5.1,Operations,Compliant,1,0,98
+P011,Litigation Response Policy,Operations,Daniel Walker,Approved,2024-10-29,2025-06-05,v1.8,HR Compliance,Compliant,2,0,98
+P012,Cloud Usage Policy,HR,Chris Moore,Approved,2026-05-15,2026-11-03,v5.1,Data Governance,Compliant,0,0,87
+P013,Contract Review Policy,HR,Andrew Patel,Approved,2024-03-29,2026-04-08,v1.9,HR Compliance,Compliant,2,0,89
+P014,Data Retention Policy,Operations,Emma White,Pending,2024-01-18,2027-02-01,v5.1,Cybersecurity,At Risk,1,0,70
+P015,Access Control Policy,Operations,Matthew Chen,Approved,2025-01-17,2028-06-11,v2.8,Data Governance,Non-Compliant,7,4,65
+P016,Workplace Conduct Policy,Finance,Robert White,Approved,2024-12-05,2027-11-23,v1.5,Cybersecurity,Non-Compliant,6,2,62
+P017,Records Retention Policy,Legal,Nancy Allen,Approved,2026-03-07,2025-09-10,v3.1,Legal & Regulatory,Non-Compliant,4,1,69
+P018,Employee Onboarding Policy,Finance,Ethan Patel,Approved,2024-05-08,2028-07-25,v2.7,Operations,Compliant,1,0,91
+P019,Cloud Usage Policy,Finance,Emma Moore,Approved,2025-03-24,2027-12-25,v4.5,Cybersecurity,Non-Compliant,4,1,58
+P020,Financial Reporting Controls,Finance,Kevin Hall,Approved,2025-03-12,2026-05-23,v1.7,Legal & Regulatory,At Risk,4,0,72
+P021,Vendor Security Policy,IT,Matthew Smith,Rejected,2024-04-07,2026-09-09,v4.3,Operations,Non-Compliant,9,4,65
+P022,Expense Reimbursement Policy,IT,Robert Smith,Rejected,2025-08-20,2027-11-30,v2.3,HR Compliance,At Risk,4,1,73
+P023,Vendor Security Policy,Finance,Victoria Hall,Approved,2025-07-01,2025-09-07,v1.8,Cybersecurity,Non-Compliant,10,2,58
+P024,Access Control Policy,Finance,Andrew Brown,Approved,2025-09-20,2027-08-17,v5.1,Operations,Non-Compliant,6,1,62
+P025,Regulatory Compliance Policy,Legal,Grace Davis,Rejected,2025-10-21,2027-02-15,v2.4,Operations,At Risk,3,1,70
+P026,Access Control Policy,HR,John Harris,Approved,2024-10-19,2025-12-03,v2.5,Cybersecurity,Non-Compliant,6,3,59
+P027,Leave Management Policy,Finance,Chris Martin,Approved,2024-11-08,2027-01-22,v5.0,Data Governance,Compliant,2,0,94
+P028,Workplace Conduct Policy,Legal,Emma Chen,Approved,2026-01-29,2028-06-19,v5.3,Data Governance,Non-Compliant,7,3,64
+P029,Financial Reporting Controls,HR,Emily Walker,Approved,2024-01-03,2025-08-25,v1.0,HR Compliance,Non-Compliant,9,3,60
+P030,Employee Onboarding Policy,Finance,Lisa Harris,Approved,2025-03-07,2028-07-04,v2.8,Cybersecurity,Non-Compliant,4,1,55
+P031,Regulatory Compliance Policy,HR,Matthew Chen,Approved,2026-04-06,2027-02-03,v2.3,Data Governance,At Risk,1,1,78
+P032,Leave Management Policy,IT,Matthew Moore,Rejected,2024-04-11,2026-03-25,v4.0,Financial Controls,At Risk,2,0,70
+P033,Inventory Management Policy,HR,Nancy Johnson,Approved,2024-05-30,2025-12-20,v2.3,Operations,At Risk,1,1,79
+P034,Workplace Conduct Policy,HR,Nancy Garcia,Approved,2025-11-02,2027-08-07,v3.5,Data Governance,At Risk,3,0,76
+P035,Procurement Policy,Legal,Matthew Davis,Rejected,2026-01-20,2026-10-29,v1.9,Operations,Non-Compliant,7,1,66
+P036,Remote Work Policy,HR,Olivia Young,Rejected,2026-01-20,2027-07-10,v3.0,Data Governance,Compliant,0,0,91
+P037,Data Retention Policy,Operations,Grace Hall,Approved,2024-04-19,2026-06-20,v3.9,HR Compliance,At Risk,4,0,78
+P038,Workplace Conduct Policy,IT,Grace Anderson,Approved,2025-06-18,2027-08-15,v5.2,Financial Controls,Compliant,1,0,99
+P039,Procurement Policy,Operations,Lisa Young,Approved,2025-03-29,2028-06-08,v2.6,Legal & Regulatory,Non-Compliant,7,3,55
+P040,Remote Work Policy,Legal,Daniel Harris,Approved,2025-10-12,2028-03-24,v2.1,HR Compliance,Compliant,2,0,85
+P041,Litigation Response Policy,Legal,Sophia Brown,Pending,2024-04-09,2026-09-06,v2.3,Financial Controls,Compliant,1,0,98
+P042,Vendor Security Policy,IT,Nancy Clark,Approved,2024-03-23,2025-10-09,v4.7,Operations,At Risk,4,0,84
+P043,Payroll Controls,Finance,John Wilson,Pending,2025-10-06,2026-05-08,v4.0,Legal & Regulatory,Compliant,2,0,99
+P044,Cloud Usage Policy,Finance,Daniel Chen,Pending,2024-07-04,2028-05-04,v3.7,Legal & Regulatory,Compliant,2,0,90
+P045,Inventory Management Policy,Legal,Matthew Harris,Pending,2024-04-17,2028-01-10,v3.8,Operations,At Risk,3,0,83
+P046,Employee Onboarding Policy,Finance,Daniel Brown,Pending,2025-09-20,2026-11-20,v2.2,Financial Controls,At Risk,3,0,76
+P047,Payroll Controls,Operations,Kevin Brown,Approved,2025-06-14,2028-05-28,v2.6,Operations,At Risk,4,0,84
+P048,Data Retention Policy,Legal,Victoria Taylor,Approved,2025-05-23,2027-01-14,v4.3,HR Compliance,At Risk,4,0,79
+P049,Supplier Assessment Policy,Operations,John Taylor,Approved,2024-06-22,2027-08-19,v5.8,Cybersecurity,Non-Compliant,10,2,65
+P050,Regulatory Compliance Policy,Operations,Victoria Smith,Approved,2025-03-06,2026-02-14,v3.6,HR Compliance,At Risk,2,0,84
+P051,Business Continuity Policy,Finance,Sophia Davis,Pending,2025-04-25,2026-12-03,v4.0,Data Governance,At Risk,3,0,81
+P052,Vendor Security Policy,Legal,James Garcia,Approved,2024-03-10,2025-08-03,v1.9,Financial Controls,Non-Compliant,6,2,56
+P053,Payroll Controls,Finance,Ethan Wilson,Approved,2025-10-07,2027-12-21,v3.2,Legal & Regulatory,Compliant,1,0,99
+P054,Cloud Usage Policy,Legal,Lisa Anderson,Approved,2026-04-22,2027-02-10,v4.6,Data Governance,Compliant,2,0,91
+P055,Access Control Policy,Finance,Victoria Garcia,Approved,2024-03-18,2027-01-20,v1.9,Cybersecurity,Compliant,2,0,98
+P056,Records Retention Policy,HR,Olivia White,Approved,2024-07-24,2027-04-11,v1.6,HR Compliance,Non-Compliant,9,4,55
+P057,Payroll Controls,Operations,Olivia Martin,Pending,2024-07-21,2026-11-17,v4.7,Operations,Compliant,2,0,94
+P058,Employee Onboarding Policy,Legal,Sophia Garcia,Pending,2026-02-19,2026-12-05,v5.9,Data Governance,At Risk,2,1,83
+P059,Remote Work Policy,Operations,John Clark,Pending,2025-11-13,2028-02-05,v3.4,Legal & Regulatory,Non-Compliant,8,3,68
+P060,Records Retention Policy,HR,John Walker,Rejected,2026-02-20,2026-09-19,v4.7,Operations,At Risk,4,0,81
+P061,Access Control Policy,IT,Chris Garcia,Approved,2025-09-11,2027-01-30,v3.7,Legal & Regulatory,Compliant,2,0,97
+P062,Leave Management Policy,Legal,Olivia Hall,Approved,2024-05-29,2027-11-28,v2.1,Data Governance,At Risk,3,1,72
+P063,Remote Work Policy,Finance,Emma Hall,Rejected,2024-06-11,2026-05-27,v3.9,Legal & Regulatory,Non-Compliant,6,4,67
+P064,Workplace Conduct Policy,Legal,Emma Patel,Approved,2025-05-14,2026-05-15,v3.0,Cybersecurity,At Risk,1,0,74
+P065,Workplace Conduct Policy,Legal,David Clark,Approved,2026-05-06,2028-07-31,v4.5,Financial Controls,At Risk,4,1,73
+P066,Employee Onboarding Policy,IT,Ethan Wilson,Pending,2025-04-03,2028-02-14,v2.9,HR Compliance,Non-Compliant,3,2,59
+P067,Accounts Payable Review,IT,Emma Hall,Pending,2024-09-05,2026-08-18,v4.7,HR Compliance,Compliant,1,0,88
+P068,Inventory Management Policy,Legal,Chris Allen,Approved,2024-09-01,2025-12-02,v1.2,Financial Controls,Non-Compliant,6,3,68
+P069,Records Retention Policy,Finance,Michael Martin,Approved,2025-02-11,2027-12-31,v3.4,Data Governance,At Risk,1,0,73
+P070,Access Control Policy,Operations,Nancy Johnson,Pending,2024-08-16,2026-06-22,v2.4,Financial Controls,At Risk,1,0,82
+P071,Vendor Security Policy,IT,Lisa Anderson,Approved,2024-01-25,2028-07-21,v4.4,Data Governance,At Risk,4,0,73
+P072,Employee Onboarding Policy,Operations,Grace Hall,Approved,2026-02-25,2025-08-02,v1.1,Financial Controls,At Risk,3,1,82
+P073,Regulatory Compliance Policy,Legal,John Johnson,Approved,2024-03-28,2026-05-06,v4.4,Financial Controls,Compliant,2,0,85
+P074,Inventory Management Policy,Legal,Ethan Brown,Approved,2025-03-26,2027-03-26,v3.6,Data Governance,At Risk,1,0,75
+P075,Workplace Conduct Policy,Operations,Robert Hall,Approved,2026-02-17,2027-02-16,v4.8,Cybersecurity,At Risk,3,0,71
+P076,Business Continuity Policy,Legal,Olivia Lee,Approved,2025-05-13,2028-02-27,v1.3,HR Compliance,Compliant,1,0,95
+P077,Payroll Controls,Legal,Chris Harris,Pending,2025-01-07,2026-01-16,v3.8,Cybersecurity,Non-Compliant,6,2,56
+P078,Inventory Management Policy,Legal,Michael Garcia,Rejected,2026-01-22,2027-12-14,v3.8,Data Governance,Non-Compliant,5,4,62
+P079,Inventory Management Policy,HR,Ethan Clark,Approved,2024-10-31,2026-03-05,v1.4,Operations,At Risk,2,0,79
+P080,Contract Review Policy,HR,Emily Smith,Approved,2025-07-17,2028-08-12,v2.7,Legal & Regulatory,Compliant,1,0,97
+P081,Leave Management Policy,Operations,Sophia Hall,Pending,2025-04-27,2027-12-01,v5.6,Financial Controls,At Risk,2,0,75
+P082,Vendor Security Policy,Operations,Sophia Clark,Pending,2024-02-08,2027-07-02,v1.2,Legal & Regulatory,At Risk,2,1,79
+P083,Remote Work Policy,Legal,Emma Harris,Approved,2025-02-05,2025-06-13,v1.7,HR Compliance,Non-Compliant,9,2,64
+P084,Litigation Response Policy,HR,Robert Brown,Pending,2024-06-27,2028-05-09,v5.0,Legal & Regulatory,At Risk,3,1,79
+P085,Accounts Payable Review,IT,Chris Garcia,Pending,2025-02-28,2025-11-30,v1.7,Financial Controls,Compliant,2,0,95
+P086,Data Retention Policy,HR,Sarah Davis,Pending,2025-07-22,2027-05-17,v2.8,Operations,At Risk,4,0,78
+P087,Expense Reimbursement Policy,Legal,Lisa Martin,Approved,2025-04-22,2026-09-18,v2.3,Operations,Compliant,2,0,86
+P088,Business Continuity Policy,HR,Emily Smith,Pending,2025-01-27,2026-12-23,v2.1,Operations,Compliant,2,0,98
+P089,Regulatory Compliance Policy,HR,Chris Moore,Approved,2025-02-05,2027-01-21,v1.3,Operations,Non-Compliant,9,4,67
+P090,Leave Management Policy,Legal,Victoria Anderson,Rejected,2025-07-20,2025-06-26,v3.0,Legal & Regulatory,Compliant,1,0,97
+P091,Litigation Response Policy,IT,Ethan Anderson,Pending,2025-09-25,2027-05-04,v2.1,Data Governance,Non-Compliant,6,3,69
+P092,Workplace Conduct Policy,IT,Daniel Lee,Approved,2024-04-29,2026-02-06,v4.2,Financial Controls,Non-Compliant,7,3,60
+P093,Records Retention Policy,Finance,James Walker,Approved,2025-08-12,2026-04-14,v3.1,Operations,At Risk,4,1,71
+P094,Payroll Controls,IT,Nancy Taylor,Rejected,2024-02-15,2028-06-27,v1.4,Legal & Regulatory,At Risk,1,1,78
+P095,Business Continuity Policy,IT,James Johnson,Approved,2024-01-27,2027-06-12,v1.9,Legal & Regulatory,Non-Compliant,6,4,61
+P096,Litigation Response Policy,HR,Nancy Brown,Approved,2025-01-28,2027-01-21,v1.2,Cybersecurity,Compliant,1,0,96
+P097,Workplace Conduct Policy,IT,Ethan Wilson,Approved,2024-11-14,2026-02-14,v5.6,Legal & Regulatory,At Risk,4,1,79
+P098,Inventory Management Policy,Finance,Emma Clark,Approved,2025-08-05,2025-07-19,v2.7,Operations,Compliant,1,0,99
+P099,Leave Management Policy,Finance,Emma White,Approved,2024-07-27,2027-05-17,v2.1,Operations,Non-Compliant,9,3,58
+P100,Financial Reporting Controls,IT,Andrew Smith,Approved,2025-06-11,2026-09-23,v5.3,Legal & Regulatory,Non-Compliant,6,1,63
+P101,Accounts Payable Review,Finance,Sophia Chen,Pending,2024-09-15,2025-05-18,v5.4,Financial Controls,At Risk,2,0,72
+P102,Data Retention Policy,IT,David Smith,Approved,2024-03-02,2026-09-12,v1.2,HR Compliance,Compliant,1,0,92
+P103,Payroll Controls,IT,Olivia Walker,Approved,2026-03-14,2028-01-13,v4.8,Financial Controls,At Risk,3,0,83
+P104,Vendor Security Policy,Legal,Grace Anderson,Approved,2026-04-17,2025-09-14,v4.1,Operations,Compliant,1,0,85
+P105,Access Control Policy,Operations,Michael Davis,Approved,2026-03-12,2026-01-26,v4.9,Legal & Regulatory,At Risk,5,1,72
+P106,Business Continuity Policy,HR,Grace Young,Approved,2024-02-26,2026-01-02,v5.3,Operations,Compliant,2,0,96
+P107,Accounts Payable Review,Operations,Olivia Davis,Pending,2025-04-05,2027-09-11,v3.4,HR Compliance,Non-Compliant,8,4,61
+P108,Supplier Assessment Policy,Finance,Michael Brown,Pending,2026-02-12,2027-10-14,v5.0,Legal & Regulatory,Non-Compliant,8,2,61
+P109,Records Retention Policy,Legal,Sophia Wilson,Approved,2024-07-06,2027-09-26,v3.1,Legal & Regulatory,Non-Compliant,7,3,58
+P110,Financial Reporting Controls,Legal,David Clark,Approved,2026-01-28,2027-04-30,v1.4,Legal & Regulatory,Compliant,1,0,90
+P111,Inventory Management Policy,Finance,Matthew Young,Approved,2024-07-29,2028-06-26,v2.4,Data Governance,Non-Compliant,7,1,56
+P112,Remote Work Policy,HR,James Smith,Approved,2025-12-23,2028-07-15,v1.2,Data Governance,Compliant,1,0,97
+P113,Access Control Policy,IT,Grace Patel,Approved,2025-02-08,2027-04-11,v3.9,Legal & Regulatory,Non-Compliant,8,3,65
+P114,Vendor Security Policy,IT,David Martin,Pending,2026-03-29,2025-10-27,v4.9,Operations,At Risk,4,1,72
+P115,Employee Onboarding Policy,Operations,Kevin Walker,Approved,2025-03-04,2025-12-26,v5.4,Cybersecurity,At Risk,5,1,73
+P116,Procurement Policy,Finance,Andrew Lee,Approved,2025-07-14,2026-07-19,v3.1,Cybersecurity,Non-Compliant,7,3,63
+P117,Inventory Management Policy,Operations,Lisa Chen,Approved,2024-05-28,2026-08-27,v3.1,Operations,Compliant,2,0,87
+P118,Inventory Management Policy,IT,John Harris,Rejected,2025-07-02,2028-08-04,v4.4,Cybersecurity,At Risk,5,1,82
+P119,Data Retention Policy,Operations,Sophia Martin,Pending,2024-08-24,2027-12-11,v1.6,Cybersecurity,Compliant,1,0,99
+P120,Inventory Management Policy,Finance,Victoria Taylor,Approved,2025-04-08,2027-02-07,v2.1,Legal & Regulatory,At Risk,2,1,76
+P121,Contract Review Policy,IT,Grace Patel,Rejected,2025-05-26,2027-05-02,v2.1,Financial Controls,Compliant,0,0,96
+P122,Financial Reporting Controls,HR,Lisa Young,Approved,2024-04-01,2025-10-14,v5.9,Operations,Non-Compliant,10,4,66
+P123,Litigation Response Policy,Legal,Sophia Davis,Approved,2026-03-10,2027-12-29,v5.0,HR Compliance,At Risk,3,1,83
+P124,Access Control Policy,Legal,Chris Harris,Approved,2026-03-21,2027-06-07,v5.9,Legal & Regulatory,At Risk,1,0,73
+P125,Business Continuity Policy,Operations,Victoria Hall,Rejected,2024-04-22,2025-08-05,v3.9,Operations,At Risk,5,0,83
+P126,Payroll Controls,Legal,Sarah Harris,Approved,2024-01-12,2027-04-16,v5.2,Cybersecurity,Compliant,0,0,100
+P127,Business Continuity Policy,Finance,Daniel Walker,Approved,2025-12-07,2027-05-28,v4.5,Data Governance,At Risk,3,1,78
+P128,Vendor Security Policy,Legal,Sophia Brown,Approved,2024-10-24,2027-07-13,v3.1,Legal & Regulatory,At Risk,3,0,73
+P129,Leave Management Policy,Finance,Chris Taylor,Approved,2024-05-23,2025-11-02,v3.2,Data Governance,At Risk,5,1,74
+P130,Access Control Policy,Legal,Olivia Walker,Approved,2025-05-12,2027-02-04,v4.3,Financial Controls,Non-Compliant,6,3,66
+P131,Payroll Controls,Finance,Michael Anderson,Pending,2026-02-04,2028-03-17,v5.0,Data Governance,Compliant,2,0,89
+P132,Litigation Response Policy,HR,David Young,Approved,2025-12-03,2026-05-18,v2.7,Cybersecurity,Compliant,2,0,99
+P133,Leave Management Policy,Operations,Nancy Harris,Approved,2024-04-08,2027-11-18,v4.3,HR Compliance,Non-Compliant,6,3,69
+P134,Business Continuity Policy,Legal,Daniel Anderson,Pending,2024-12-20,2028-04-27,v5.2,HR Compliance,At Risk,2,0,81
+P135,Supplier Assessment Policy,IT,James Hall,Rejected,2024-05-20,2028-04-03,v2.4,Operations,Non-Compliant,7,1,62
+P136,Payroll Controls,Legal,Olivia Brown,Rejected,2025-10-03,2027-11-22,v1.6,Legal & Regulatory,At Risk,1,1,77
+P137,Accounts Payable Review,HR,Robert Brown,Approved,2026-04-20,2027-02-24,v2.0,HR Compliance,Non-Compliant,8,2,61
+P138,Payroll Controls,Operations,Ethan Harris,Approved,2026-02-26,2025-06-20,v5.9,Legal & Regulatory,At Risk,2,0,71
+P139,Cloud Usage Policy,Operations,Chris Garcia,Approved,2026-03-31,2026-09-13,v1.1,Operations,At Risk,5,1,81
+P140,Records Retention Policy,Legal,John Walker,Approved,2024-05-13,2026-03-03,v5.5,Financial Controls,At Risk,4,0,73
+P141,Inventory Management Policy,Legal,Lisa Brown,Approved,2025-05-14,2025-09-28,v5.8,Legal & Regulatory,Compliant,2,0,88
+P142,Procurement Policy,IT,Ethan Lee,Approved,2025-05-01,2026-10-14,v3.3,Data Governance,Non-Compliant,8,1,56
+P143,Regulatory Compliance Policy,IT,Sophia Chen,Approved,2024-11-05,2027-04-06,v4.7,Data Governance,Compliant,0,0,96
+P144,Payroll Controls,Finance,Michael Harris,Approved,2025-10-24,2025-08-10,v3.8,Operations,Non-Compliant,3,3,67
+P145,Supplier Assessment Policy,Legal,Emily Lee,Pending,2025-11-04,2026-12-19,v3.1,HR Compliance,At Risk,1,1,77
+P146,Procurement Policy,Operations,Daniel Taylor,Approved,2025-11-08,2028-02-23,v3.8,HR Compliance,Compliant,1,0,99
+P147,Inventory Management Policy,IT,Michael Moore,Approved,2024-01-27,2026-05-17,v3.1,Cybersecurity,Compliant,1,0,89
+P148,Workplace Conduct Policy,HR,Chris Harris,Approved,2025-03-08,2026-04-19,v3.7,Cybersecurity,Compliant,1,0,99
+P149,Litigation Response Policy,HR,Olivia Johnson,Approved,2024-02-28,2025-09-07,v5.2,Cybersecurity,Non-Compliant,9,3,59
+P150,Litigation Response Policy,Finance,Daniel Lee,Approved,2025-09-19,2027-06-02,v5.2,Data Governance,At Risk,4,0,78
+P151,Leave Management Policy,Operations,James Harris,Pending,2024-10-08,2026-02-18,v4.5,Data Governance,Compliant,1,0,88
+P152,Accounts Payable Review,HR,Emma Smith,Pending,2024-12-23,2028-04-07,v3.4,Data Governance,At Risk,5,0,79
+P153,Financial Reporting Controls,Operations,Andrew Anderson,Approved,2025-01-01,2026-06-26,v4.2,Data Governance,Non-Compliant,5,1,62
+P154,Access Control Policy,Operations,Sophia White,Pending,2024-11-01,2028-05-27,v2.5,Legal & Regulatory,At Risk,3,0,73
+P155,Cloud Usage Policy,Finance,Kevin Chen,Approved,2024-12-29,2025-07-05,v4.8,Financial Controls,At Risk,5,1,78
+P156,Access Control Policy,Legal,Michael Anderson,Approved,2024-05-14,2028-01-18,v4.9,Cybersecurity,Compliant,1,0,88
+P157,Remote Work Policy,Finance,Michael Harris,Approved,2024-12-05,2027-04-18,v4.8,Cybersecurity,Non-Compliant,5,2,63
+P158,Contract Review Policy,IT,David Anderson,Approved,2025-06-22,2026-08-17,v1.4,Financial Controls,At Risk,5,1,77
+P159,Employee Onboarding Policy,Legal,David Anderson,Approved,2026-02-12,2028-03-07,v5.9,Financial Controls,Compliant,0,0,96
+P160,Litigation Response Policy,Finance,Andrew Davis,Pending,2024-10-18,2025-08-05,v5.4,Data Governance,Non-Compliant,4,1,56
+P161,Regulatory Compliance Policy,Finance,Olivia Young,Approved,2024-12-25,2028-06-03,v2.6,HR Compliance,At Risk,3,1,73
+P162,Access Control Policy,Operations,Sarah Martin,Approved,2025-01-08,2027-12-20,v3.5,Data Governance,Non-Compliant,8,2,68
+P163,Procurement Policy,HR,David White,Approved,2026-01-30,2027-02-25,v3.7,Financial Controls,At Risk,4,0,70
+P164,Cloud Usage Policy,Finance,Sarah Anderson,Rejected,2024-08-26,2027-09-16,v5.5,Financial Controls,At Risk,2,1,70
+P165,Supplier Assessment Policy,Finance,Grace Harris,Approved,2025-07-07,2028-02-25,v5.7,Financial Controls,Non-Compliant,4,4,56
+P166,Regulatory Compliance Policy,Finance,James Lee,Approved,2024-12-28,2028-01-01,v1.6,Financial Controls,At Risk,5,0,73
+P167,Leave Management Policy,HR,Robert White,Approved,2026-03-27,2028-07-23,v3.8,HR Compliance,Compliant,0,0,90
+P168,Procurement Policy,IT,Grace Harris,Pending,2025-08-05,2026-01-11,v3.5,Legal & Regulatory,Non-Compliant,4,4,63
+P169,Payroll Controls,HR,Kevin Young,Approved,2024-12-22,2025-08-03,v3.7,Legal & Regulatory,Non-Compliant,3,2,57
+P170,Payroll Controls,Operations,Andrew Walker,Approved,2024-08-29,2027-02-24,v5.5,Legal & Regulatory,Non-Compliant,9,3,65
+P171,Records Retention Policy,Legal,Ethan Allen,Approved,2024-02-03,2025-06-16,v4.9,HR Compliance,At Risk,3,0,78
+P172,Litigation Response Policy,IT,Ethan Johnson,Rejected,2024-03-08,2028-08-09,v1.9,Operations,Compliant,0,0,91
+P173,Contract Review Policy,Finance,Andrew Taylor,Approved,2024-06-20,2026-09-21,v1.7,HR Compliance,Non-Compliant,4,2,57
+P174,Payroll Controls,Operations,Olivia Patel,Approved,2024-03-16,2028-01-03,v5.5,Data Governance,Non-Compliant,5,2,58
+P175,Contract Review Policy,Operations,Robert Davis,Rejected,2025-02-02,2028-05-08,v3.9,Operations,At Risk,5,1,76
+P176,Accounts Payable Review,Finance,Emily Hall,Approved,2025-07-18,2026-12-25,v4.5,Operations,Compliant,0,0,100
+P177,Records Retention Policy,HR,Emily Anderson,Approved,2024-06-25,2028-05-29,v2.4,Cybersecurity,At Risk,4,1,79
+P178,Access Control Policy,HR,James Harris,Approved,2024-04-13,2028-01-19,v5.4,Financial Controls,Non-Compliant,6,3,68
+P179,Litigation Response Policy,IT,Victoria Garcia,Approved,2024-07-02,2028-05-04,v1.6,HR Compliance,Non-Compliant,6,1,69
+P180,Cloud Usage Policy,Operations,David Smith,Rejected,2025-12-08,2027-08-24,v4.3,HR Compliance,Compliant,1,0,96
+P181,Workplace Conduct Policy,HR,Sarah Brown,Approved,2025-09-23,2028-05-12,v2.0,Operations,Non-Compliant,5,4,57
+P182,Expense Reimbursement Policy,Operations,Chris Lee,Approved,2024-10-14,2025-12-18,v5.8,Operations,At Risk,3,1,76
+P183,Contract Review Policy,Finance,Daniel Johnson,Approved,2026-01-23,2027-03-21,v2.0,Data Governance,Non-Compliant,10,3,65
+P184,Workplace Conduct Policy,HR,Victoria Patel,Approved,2024-08-02,2027-08-21,v1.6,Data Governance,At Risk,5,1,82
+P185,Expense Reimbursement Policy,IT,David Clark,Approved,2025-09-06,2025-05-26,v4.4,HR Compliance,At Risk,4,0,71
+P186,Regulatory Compliance Policy,HR,Victoria Smith,Approved,2025-05-15,2026-09-08,v3.2,Operations,Non-Compliant,4,4,58
+P187,Workplace Conduct Policy,Legal,Emma Anderson,Approved,2025-10-04,2026-08-04,v4.9,HR Compliance,Non-Compliant,10,2,63
+P188,Records Retention Policy,Operations,Ethan Hall,Pending,2024-01-24,2026-08-03,v5.7,Legal & Regulatory,At Risk,5,0,70
+P189,Access Control Policy,HR,Victoria Wilson,Approved,2024-11-04,2028-03-13,v3.8,Operations,Non-Compliant,5,2,67
+P190,Financial Reporting Controls,IT,Victoria Clark,Approved,2024-12-12,2027-11-11,v5.6,Operations,Non-Compliant,10,2,58
+P191,Vendor Security Policy,Legal,Matthew Harris,Approved,2025-07-07,2025-06-26,v2.9,Cybersecurity,At Risk,3,0,80
+P192,Inventory Management Policy,IT,James Brown,Approved,2026-03-18,2025-10-01,v3.6,Financial Controls,Compliant,0,0,85
+P193,Inventory Management Policy,Finance,James Taylor,Approved,2025-04-27,2027-06-21,v1.2,Legal & Regulatory,Non-Compliant,5,3,60
+P194,Contract Review Policy,Operations,David Garcia,Pending,2024-04-04,2025-06-28,v5.6,Financial Controls,At Risk,4,1,74
+P195,Business Continuity Policy,Finance,James Chen,Approved,2024-05-06,2025-12-30,v2.3,Cybersecurity,Non-Compliant,9,1,57
+P196,Litigation Response Policy,IT,Sarah Harris,Approved,2024-05-28,2025-08-20,v4.3,Legal & Regulatory,At Risk,1,1,70
+P197,Vendor Security Policy,Finance,David Walker,Rejected,2025-09-21,2028-08-04,v2.4,Financial Controls,At Risk,5,1,75
+P198,Accounts Payable Review,Legal,Olivia Anderson,Approved,2024-10-25,2026-05-06,v4.8,Operations,Compliant,2,0,95
+P199,Leave Management Policy,IT,Robert Walker,Approved,2025-03-18,2027-08-27,v2.8,Operations,Non-Compliant,7,4,64
+P200,Accounts Payable Review,Finance,Chris Chen,Pending,2026-03-20,2028-07-07,v4.3,HR Compliance,At Risk,4,0,81
+P201,Remote Work Policy,Finance,Michael Harris,Pending,2026-02-13,2028-05-13,v4.9,Legal & Regulatory,Non-Compliant,3,3,67
+P202,Access Control Policy,IT,Kevin Allen,Pending,2024-10-23,2026-07-31,v3.4,Cybersecurity,Compliant,0,0,85
+P203,Financial Reporting Controls,Finance,Emma Clark,Rejected,2024-06-05,2026-07-05,v3.6,Operations,At Risk,2,1,80
+P204,Leave Management Policy,Legal,Chris Johnson,Approved,2024-12-25,2027-12-23,v2.5,HR Compliance,Non-Compliant,10,3,61
+P205,Vendor Security Policy,Operations,Victoria Garcia,Pending,2026-05-02,2026-10-29,v5.6,HR Compliance,Compliant,2,0,90
+P206,Financial Reporting Controls,Finance,Sophia Garcia,Approved,2024-01-16,2026-09-28,v3.4,Operations,Compliant,2,0,86
+P207,Business Continuity Policy,Operations,Lisa White,Approved,2024-05-11,2028-06-05,v5.0,Legal & Regulatory,Compliant,0,0,86
+P208,Access Control Policy,IT,Sarah Smith,Approved,2024-01-07,2026-08-29,v2.8,Operations,Non-Compliant,5,1,59
+P209,Vendor Security Policy,HR,Andrew Young,Rejected,2024-07-12,2028-02-06,v1.0,Legal & Regulatory,Non-Compliant,3,4,56
+P210,Records Retention Policy,HR,Chris Smith,Approved,2024-06-03,2027-10-11,v5.2,Financial Controls,Non-Compliant,4,1,66
+P211,Litigation Response Policy,Finance,Grace Johnson,Pending,2025-08-18,2027-08-03,v4.9,Financial Controls,Non-Compliant,8,4,60
+P212,Workplace Conduct Policy,Finance,Michael Lee,Approved,2025-04-25,2027-06-24,v1.0,Data Governance,Compliant,1,0,90
+P213,Access Control Policy,Finance,Ethan Moore,Approved,2025-06-13,2028-07-14,v2.9,Operations,Non-Compliant,3,2,61
+P214,Vendor Security Policy,HR,Michael Johnson,Pending,2024-10-18,2025-07-19,v2.9,Financial Controls,Non-Compliant,8,1,66
+P215,Access Control Policy,Operations,Chris Martin,Approved,2024-10-15,2027-07-18,v3.6,Data Governance,Compliant,2,0,98
+P216,Access Control Policy,Finance,Grace White,Approved,2025-02-25,2026-08-31,v3.0,Data Governance,Non-Compliant,8,4,59
+P217,Business Continuity Policy,HR,Ethan Garcia,Approved,2025-04-29,2027-10-14,v5.4,Financial Controls,Non-Compliant,9,1,66
+P218,Access Control Policy,IT,Emily Chen,Approved,2024-03-07,2026-03-24,v1.1,Cybersecurity,At Risk,3,1,79
+P219,Business Continuity Policy,HR,James Johnson,Approved,2026-02-18,2026-05-31,v1.0,Cybersecurity,At Risk,4,1,82
+P220,Records Retention Policy,HR,Michael Young,Approved,2025-06-20,2027-07-10,v4.1,Data Governance,Non-Compliant,7,4,55
+P221,Accounts Payable Review,Legal,Victoria Walker,Approved,2025-04-24,2026-04-25,v3.7,Financial Controls,Non-Compliant,7,3,63
+P222,Expense Reimbursement Policy,IT,Olivia Johnson,Approved,2025-01-08,2025-10-17,v4.9,Legal & Regulatory,At Risk,3,0,78
+P223,Business Continuity Policy,Finance,Emma Chen,Approved,2025-04-08,2027-03-24,v3.7,HR Compliance,Compliant,1,0,94
+P224,Litigation Response Policy,Operations,David Anderson,Approved,2024-06-06,2026-06-28,v2.6,HR Compliance,Compliant,1,0,85
+P225,Supplier Assessment Policy,HR,Victoria Garcia,Approved,2025-08-04,2027-07-26,v5.8,Financial Controls,At Risk,1,0,78
+P226,Data Retention Policy,Legal,Daniel Patel,Approved,2025-07-24,2025-10-01,v3.3,HR Compliance,At Risk,4,0,81
+P227,Inventory Management Policy,Finance,Robert Brown,Approved,2024-09-13,2028-01-19,v5.8,Data Governance,Compliant,1,0,92
+P228,Records Retention Policy,Operations,Sarah White,Pending,2024-02-07,2028-05-16,v1.1,Financial Controls,Compliant,2,0,93
+P229,Expense Reimbursement Policy,HR,Andrew Lee,Approved,2024-07-27,2027-08-09,v1.1,HR Compliance,At Risk,4,0,76
+P230,Contract Review Policy,Finance,Grace Hall,Approved,2024-10-06,2026-08-08,v4.9,Data Governance,At Risk,3,1,83
+P231,Payroll Controls,Legal,James Smith,Approved,2025-07-20,2027-09-11,v3.4,HR Compliance,Non-Compliant,4,2,60
+P232,Financial Reporting Controls,Operations,Grace Clark,Approved,2026-02-08,2027-10-27,v3.1,HR Compliance,Compliant,1,0,99
+P233,Cloud Usage Policy,IT,John Davis,Approved,2024-06-24,2026-04-14,v5.2,HR Compliance,At Risk,5,0,70
+P234,Inventory Management Policy,Legal,Daniel Garcia,Pending,2024-08-12,2026-05-25,v1.9,Financial Controls,Non-Compliant,9,4,66
+P235,Regulatory Compliance Policy,Operations,Olivia Taylor,Approved,2025-10-11,2026-07-08,v5.2,HR Compliance,At Risk,1,0,72
+P236,Financial Reporting Controls,HR,Daniel Wilson,Approved,2025-01-02,2028-04-27,v5.6,Legal & Regulatory,Compliant,1,0,95
+P237,Regulatory Compliance Policy,Operations,Emma White,Approved,2025-02-04,2026-05-01,v3.9,Legal & Regulatory,Compliant,2,0,98
+P238,Payroll Controls,IT,Sophia Wilson,Approved,2026-01-19,2026-05-22,v4.9,Financial Controls,At Risk,2,1,78
+P239,Procurement Policy,Legal,Olivia Martin,Approved,2024-11-14,2026-05-02,v4.4,Financial Controls,Compliant,0,0,90
+P240,Remote Work Policy,Finance,Daniel Young,Approved,2025-05-16,2025-06-01,v2.6,Legal & Regulatory,Compliant,0,0,86
+P241,Supplier Assessment Policy,Legal,Olivia Clark,Approved,2024-01-09,2027-11-08,v1.9,Cybersecurity,Compliant,0,0,86
+P242,Workplace Conduct Policy,Finance,Sarah Johnson,Approved,2025-07-27,2026-04-22,v5.8,Cybersecurity,At Risk,5,1,84
+P243,Cloud Usage Policy,Legal,Emily Hall,Pending,2025-05-08,2028-05-27,v4.1,Data Governance,Non-Compliant,10,2,57
+P244,Workplace Conduct Policy,Finance,Sarah Harris,Approved,2024-02-02,2025-11-07,v2.9,Data Governance,At Risk,1,0,83
+P245,Litigation Response Policy,HR,Olivia Martin,Approved,2024-03-06,2026-07-10,v5.4,Legal & Regulatory,Non-Compliant,3,3,68
+P246,Expense Reimbursement Policy,Legal,Sophia Anderson,Approved,2025-08-18,2028-03-31,v2.6,Cybersecurity,Compliant,0,0,98
+P247,Payroll Controls,HR,David Garcia,Approved,2025-06-23,2026-10-01,v4.2,Legal & Regulatory,Compliant,1,0,98
+P248,Inventory Management Policy,HR,Robert Harris,Approved,2024-02-25,2025-11-19,v3.7,Operations,At Risk,5,1,80
+P249,Regulatory Compliance Policy,HR,John Brown,Pending,2025-02-03,2027-05-16,v4.3,Operations,Non-Compliant,9,2,59
+P250,Remote Work Policy,HR,Chris Davis,Approved,2026-01-05,2028-07-15,v1.0,Cybersecurity,Compliant,1,0,86
