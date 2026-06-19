@@ -21,6 +21,10 @@ export default function Home() {
   const [selectedDepartment, setSelectedDepartment] =
     useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedPolicy, setSelectedPolicy] = useState<any>(null);
+  const [analysis, setAnalysis] = useState("");
+  const [loadingAI, setLoadingAI] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const departmentColors: Record<string, string> = {
     Finance: "bg-green-100 text-green-700",
@@ -29,6 +33,28 @@ export default function Home() {
     Legal: "bg-red-100 text-red-700",
     Operations: "bg-orange-100 text-orange-700",
   };
+
+  const analyzePolicy = async (policy: any) => {
+    setSelectedPolicy(policy);
+    setShowModal(true);
+    setLoadingAI(true);
+
+    try {
+      const res = await axios.post(
+        "http://127.0.0.1:8000/analyze-policy",
+        policy
+      );
+
+      setAnalysis(res.data.analysis);
+    } catch (err) {
+      console.error(err);
+      setAnalysis("Failed to generate AI analysis.");
+    }
+
+    setLoadingAI(false);
+  };
+
+  
 
   const getSeverity = (score: number) => {
     if (score < 60)
@@ -232,6 +258,23 @@ export default function Home() {
           </div>
         </div>
       </div>
+      {/* AI Analysis & Copilot */}
+      <th className="text-left p-3">
+        AI Analysis
+      </th>
+
+      <td className="p-3">
+        <button
+          onClick={() => analyzePolicy(risks)}
+          className="bg-blue-600 text-white px-3 py-1 rounded-lg hover:bg-blue-700"
+        >
+          Analyze
+        </button>
+      </td>
+
+      <th className="text-left p-3">
+        AI Copilot
+      </th>
 
       {/* High Risk Policies */}
       <div className="bg-white rounded-xl shadow p-6">
@@ -353,6 +396,44 @@ export default function Home() {
           </table>
         </div>
       </div>
+      {showModal && (
+      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div className="bg-white rounded-xl p-6 w-[700px] max-h-[80vh] overflow-y-auto">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-2xl font-bold">
+              AI Audit Copilot
+            </h2>
+
+            <button
+              onClick={() => setShowModal(false)}
+              className="text-gray-500 text-xl"
+            >
+              ✕
+            </button>
+          </div>
+
+          {selectedPolicy && (
+            <>
+              <h3 className="font-semibold mb-2">
+                {selectedPolicy.policy_name}
+              </h3>
+
+              <p className="text-gray-500 mb-4">
+                Department: {selectedPolicy.department}
+              </p>
+            </>
+          )}
+
+          {loadingAI ? (
+            <p>Analyzing policy...</p>
+          ) : (
+            <div className="whitespace-pre-wrap text-sm">
+              {analysis}
+            </div>
+          )}
+        </div>
+      </div>
+    )}
     </main>
   );
 }
