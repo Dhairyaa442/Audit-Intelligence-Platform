@@ -8,6 +8,7 @@ from app.routes.policies import router as policies_router
 from app.routes.risks import router as risks_router
 from app.routes.departments import router as departments_router
 from fastapi.middleware.cors import CORSMiddleware
+
 from app.services.ai_service import (
     analyze_policy as ai_analyze_policy,
     chat_with_policy,
@@ -16,6 +17,12 @@ from app.services.ai_service import (
 from app.routes.dashboard import router as dashboard_router
 
 from pydantic import BaseModel
+
+from app.services.ai_service import (
+    analyze_policy as ai_analyze_policy,
+    chat_with_policy,
+    generate_roadmap,
+)
 
 
 app = FastAPI(
@@ -53,6 +60,11 @@ class ChatRequest(BaseModel):
     report: str
     question: str
 
+class RoadmapRequest(BaseModel):
+    policy_name: str
+    department: str
+    report: str
+
 @app.get("/")
 def home():
     return {
@@ -80,4 +92,17 @@ async def policy_chat(request: ChatRequest):
 
     return {
         "answer": answer
+    }
+
+@app.post("/generate-roadmap")
+async def roadmap(request: RoadmapRequest):
+
+    roadmap = generate_roadmap(
+        request.policy_name,
+        request.department,
+        request.report,
+    )
+
+    return {
+        "roadmap": roadmap
     }

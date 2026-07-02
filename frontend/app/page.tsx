@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { LabelList } from "recharts";
+import ReactMarkdown from "react-markdown";
 
 import {
   BarChart,
@@ -53,6 +54,9 @@ export default function Home() {
     Operations: "bg-orange-100 text-orange-700",
   };
 
+  const [roadmap, setRoadmap] = useState("");
+  const [loadingRoadmap, setLoadingRoadmap] = useState(false);
+
   const analyzePolicy = async (policy: any) => {
     setLoadingAI(true);
 
@@ -73,48 +77,72 @@ export default function Home() {
     }
   };
 
-const askAI = async () => {
-  if (!question.trim() || !selectedPolicy) return;
+  const askAI = async () => {
+    if (!question.trim() || !selectedPolicy) return;
 
-  const userMessage = {
-    role: "user" as const,
-    content: question,
+    const userMessage = {
+      role: "user" as const,
+      content: question,
+    };
+
+    setMessages((prev) => [...prev, userMessage]);
+    setChatLoading(true);
+
+    try {
+      const res = await axios.post("http://localhost:8000/policy-chat", {
+        policy_name: selectedPolicy.policy_name,
+        department: selectedPolicy.department,
+        report: analysis,
+        question,
+      });
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: res.data.answer,
+        },
+      ]);
+
+      setQuestion("");
+    } catch (err) {
+      console.error(err);
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: "Sorry, I couldn't generate a response.",
+        },
+      ]);
+    }
+
+    setChatLoading(false);
   };
 
-  setMessages((prev) => [...prev, userMessage]);
-  setChatLoading(true);
+  const generateRoadmap = async () => {
+    if (!selectedPolicy) return;
 
-  try {
-    const res = await axios.post("http://localhost:8000/policy-chat", {
-      policy_name: selectedPolicy.policy_name,
-      department: selectedPolicy.department,
-      report: analysis,
-      question,
-    });
+    setLoadingRoadmap(true);
 
-    setMessages((prev) => [
-      ...prev,
-      {
-        role: "assistant",
-        content: res.data.answer,
-      },
-    ]);
+    try {
+      const res = await axios.post(
+        "http://localhost:8000/generate-roadmap",
+        {
+          policy_name: selectedPolicy.policy_name,
+          department: selectedPolicy.department,
+          report: analysis,
+        }
+      );
 
-    setQuestion("");
-  } catch (err) {
-    console.error(err);
+      setRoadmap(res.data.roadmap);
+    } catch (err) {
+      console.error(err);
+      setRoadmap("Failed to generate roadmap.");
+    }
 
-    setMessages((prev) => [
-      ...prev,
-      {
-        role: "assistant",
-        content: "Sorry, I couldn't generate a response.",
-      },
-    ]);
-  }
-
-  setChatLoading(false);
-};
+    setLoadingRoadmap(false);
+  };
 const [question, setQuestion] = useState("");
 const [chatLoading, setChatLoading] = useState(false);
 
@@ -683,6 +711,44 @@ return (
             <div className="whitespace-pre-wrap text-gray-700 leading-8">
               {analysis}
             </div>
+            <div className="mt-6">
+
+              <button
+                onClick={generateRoadmap}
+                disabled={loadingRoadmap}
+                className="mt-5 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg disabled:opacity-50"
+              >
+                {loadingRoadmap ? "Generating..." : "Generate Remediation Roadmap"}
+              </button>
+            </div>
+
+            {loadingRoadmap && (
+
+            <div className="mt-6 p-5 rounded-xl bg-green-50 border">
+
+              Generating AI Roadmap...
+
+            </div>
+
+          )}
+
+          {roadmap && (
+
+            <div className="mt-6 bg-green-50 border border-green-200 rounded-xl p-5">
+
+              <h3 className="font-bold text-lg mb-4">
+                📋 AI Remediation Roadmap
+              </h3>
+              <div className="prose max-w-none">
+                <ReactMarkdown>
+                  {roadmap}
+                </ReactMarkdown>
+              </div>
+
+            </div>
+
+          )}
+
               <h3 className="font-semibold text-xl mb-4">
                 💬 Ask AI
               </h3>

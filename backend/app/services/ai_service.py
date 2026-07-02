@@ -69,3 +69,54 @@ Be concise, professional, and practical.
 
     except Exception as e:
         return f"OPENAI ERROR: {str(e)}"
+    
+def generate_roadmap(policy_name, department, report):
+    prompt = f"""
+You are a senior compliance consultant.
+
+Policy:
+{policy_name}
+
+Department:
+{department}
+
+Compliance Report:
+{report}
+
+Generate a practical remediation roadmap.
+
+Format exactly like this:
+
+## 30-Day Compliance Roadmap
+
+Week 1
+- ...
+
+Week 2
+- ...
+
+Week 3
+- ...
+
+Week 4
+- ...
+
+Expected Compliance Score
+Current: XX%
+
+Predicted: XX%
+
+Risk Reduction
+Current: High
+
+Predicted: Low
+
+Keep it concise and actionable.
+"""
+
+    response = client.responses.create(
+        model="gpt-4.1-mini",
+        input=prompt,
+    )
+
+    return response.output_text
