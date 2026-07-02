@@ -146,6 +146,36 @@ export default function Home() {
 const [question, setQuestion] = useState("");
 const [chatLoading, setChatLoading] = useState(false);
 
+const downloadReport = async () => {
+  if (!selectedPolicy) return;
+
+  const res = await axios.post(
+    "http://localhost:8000/generate-report",
+    {
+      policy_name: selectedPolicy.policy_name,
+      department: selectedPolicy.department,
+      analysis,
+      roadmap,
+    },
+    {
+      responseType: "blob",
+    }
+  );
+
+  const url = window.URL.createObjectURL(res.data);
+
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = "Executive_Audit_Report.pdf";
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  window.URL.revokeObjectURL(url);
+};
+
 const [messages, setMessages] = useState<
   {
     role: "user" | "assistant";
@@ -711,15 +741,25 @@ return (
             <div className="whitespace-pre-wrap text-gray-700 leading-8">
               {analysis}
             </div>
-            <div className="mt-6">
+            <div className="mt-6 flex flex-wrap gap-3">
 
               <button
                 onClick={generateRoadmap}
                 disabled={loadingRoadmap}
-                className="mt-5 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg disabled:opacity-50"
+                className="bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded-lg font-medium disabled:opacity-50"
               >
-                {loadingRoadmap ? "Generating..." : "Generate Remediation Roadmap"}
+                {loadingRoadmap
+                  ? "Generating..."
+                  : "📋 Generate Remediation Roadmap"}
               </button>
+
+              <button
+                onClick={downloadReport}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg font-medium"
+              >
+                📄 Download Executive Report
+              </button>
+
             </div>
 
             {loadingRoadmap && (
@@ -746,6 +786,7 @@ return (
               </div>
 
             </div>
+            
 
           )}
 

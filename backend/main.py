@@ -9,14 +9,11 @@ from app.routes.risks import router as risks_router
 from app.routes.departments import router as departments_router
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.services.ai_service import (
-    analyze_policy as ai_analyze_policy,
-    chat_with_policy,
-)
-
 from app.routes.dashboard import router as dashboard_router
 
 from pydantic import BaseModel
+from fastapi.responses import StreamingResponse
+from app.services.report_service import generate_report_pdf
 
 from app.services.ai_service import (
     analyze_policy as ai_analyze_policy,
@@ -37,6 +34,12 @@ class Policy(BaseModel):
     department: str
     compliance_score: float
     critical_findings: int
+
+class ReportRequest(BaseModel):
+    policy_name: str
+    department: str
+    analysis: str
+    roadmap: str
 
 app.add_middleware(
     CORSMiddleware,
@@ -106,3 +109,22 @@ async def roadmap(request: RoadmapRequest):
     return {
         "roadmap": roadmap
     }
+
+@app.post("/generate-report")
+async def generate_report(request: ReportRequest):
+
+    pdf = generate_report_pdf(
+        request.policy_name,
+        request.department,
+        request.analysis,
+        request.roadmap,
+    )
+
+    return StreamingResponse(
+        pdf,
+        media_type="application/pdf",
+        headers={
+            "Content-Disposition":
+            "attachment; filename=Executive_Audit_Report.pdf"
+        },
+    )
