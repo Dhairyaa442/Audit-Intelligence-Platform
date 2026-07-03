@@ -24,6 +24,7 @@ import {
   Building2,
   TrendingUp,
   FileText,
+  Loader2,
 } from "lucide-react";
 
 type Policy = {
@@ -191,7 +192,37 @@ const suggestions = [
   "Which regulations apply?",
 ];
 
+const [training, setTraining] = useState(60);
+const [documentation, setDocumentation] = useState(60);
+const [auditFrequency, setAuditFrequency] = useState(60);
+const [automation, setAutomation] = useState(60);
 
+const [simulation, setSimulation] = useState<any>(null);
+const [loadingSimulation, setLoadingSimulation] = useState(false);
+
+const runSimulation = async () => {
+  if (!selectedPolicy) return;
+
+  setLoadingSimulation(true);
+
+  const res = await axios.post(
+    "http://localhost:8000/simulate-compliance",
+    {
+      policy_name: selectedPolicy.policy_name,
+      department: selectedPolicy.department,
+      current_score: selectedPolicy.compliance_score,
+      training,
+      documentation,
+      audit_frequency: auditFrequency,
+      automation,
+    }
+  );
+
+  setSimulation(res.data);
+
+  setLoadingSimulation(false);
+  console.log(res.data);
+};
 
 const getSeverity = (score: number) => {
   if (score < 60)
@@ -219,6 +250,7 @@ const getSeverity = (score: number) => {
 };
 
 useEffect(() => {
+  
   axios
     .get("http://127.0.0.1:8000/dashboard")
     .then((res) => setDashboard(res.data))
@@ -234,6 +266,21 @@ useEffect(() => {
     .then((res) => setRisks(res.data))
     .catch((err) => console.error(err));
 }, []);
+
+useEffect(() => {
+    setSimulation(null);
+}, [selectedPolicy]);
+
+useEffect(() => {
+  if (!selectedPolicy) return;
+
+  setSimulation(null);
+
+  setTraining(60);
+  setDocumentation(60);
+  setAuditFrequency(60);
+  setAutomation(60);
+}, [selectedPolicy]);
 
 const filteredRisks = risks.filter((risk) => {
   const departmentMatch =
@@ -789,6 +836,171 @@ return (
             
 
           )}
+          <div className="mt-8 rounded-xl border border-blue-200 bg-blue-50 p-6">
+
+          <h3 className="text-xl font-bold mb-5">
+            📈 AI Compliance Simulator
+          </h3>
+
+          {/* Training */}
+
+          <div className="mb-5">
+            <div className="flex justify-between mb-1">
+              <span>Training Coverage</span>
+              <span>{training}%</span>
+            </div>
+
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={training}
+              onChange={(e)=>setTraining(Number(e.target.value))}
+              className="w-full"
+            />
+          </div>
+
+          {/* Documentation */}
+
+          <div className="mb-5">
+            <div className="flex justify-between mb-1">
+              <span>Documentation Quality</span>
+              <span>{documentation}%</span>
+            </div>
+
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={documentation}
+              onChange={(e)=>setDocumentation(Number(e.target.value))}
+              className="w-full"
+            />
+          </div>
+
+          {/* Audit */}
+
+          <div className="mb-5">
+            <div className="flex justify-between mb-1">
+              <span>Audit Frequency</span>
+              <span>{auditFrequency}%</span>
+            </div>
+
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={auditFrequency}
+              onChange={(e)=>setAuditFrequency(Number(e.target.value))}
+              className="w-full"
+            />
+          </div>
+
+          {/* Automation */}
+
+          <div className="mb-6">
+            <div className="flex justify-between mb-1">
+              <span>Automation Level</span>
+              <span>{automation}%</span>
+            </div>
+
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={automation}
+              onChange={(e)=>setAutomation(Number(e.target.value))}
+              className="w-full"
+            />
+          </div>
+
+          <button
+            onClick={runSimulation}
+            disabled={loadingSimulation}
+            className={`px-5 py-3 rounded-lg text-white transition ${
+              loadingSimulation
+                ? "bg-indigo-400 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700"
+            }`}
+          >
+            {loadingSimulation
+              ? "Running Simulation..."
+              : "Run AI Simulation"}
+          </button>
+
+        </div>
+              {loadingSimulation ? (
+        <div className="mt-6 rounded-xl bg-white p-8 border flex justify-center items-center">
+          <Loader2 className="h-8 w-8 animate-spin text-indigo-600" />
+        </div>
+      ) : (
+        simulation && (
+          <div className="mt-6 rounded-xl bg-white p-5 border animate-fade-in">
+
+            <h3 className="font-bold text-xl mb-4">
+              AI Prediction
+            </h3>
+
+            <div className="grid grid-cols-2 gap-4">
+
+              <div>
+                <p className="text-gray-500">
+                  Current Score
+                </p>
+
+                <p className="text-3xl font-bold">
+                  {selectedPolicy?.compliance_score}%
+                </p>
+              </div>
+
+              <div>
+                <p className="text-gray-500">
+                  Predicted Score
+                </p>
+
+                <p className="text-3xl font-bold text-green-600">
+                  {simulation.predicted_score}%
+                </p>
+              </div>
+
+              <div>
+                <p className="text-gray-500">
+                  Risk Level
+                </p>
+
+                <p className="font-semibold">
+                  {simulation.risk}
+                </p>
+              </div>
+
+              <div>
+                <p className="text-gray-500">
+                  Critical Findings
+                </p>
+
+                <p className="font-semibold">
+                  {simulation.critical_findings}
+                </p>
+              </div>
+
+            </div>
+
+            <div className="mt-5 rounded-lg bg-slate-50 p-4">
+
+              <h4 className="font-semibold mb-2">
+                AI Explanation
+              </h4>
+
+              <p>
+                {simulation.explanation}
+              </p>
+
+            </div>
+            
+
+          </div>
+        )
+      )}
 
               <h3 className="font-semibold text-xl mb-4">
                 💬 Ask AI

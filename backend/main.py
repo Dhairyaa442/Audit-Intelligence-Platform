@@ -1,4 +1,6 @@
 
+from urllib import response
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -19,6 +21,7 @@ from app.services.ai_service import (
     analyze_policy as ai_analyze_policy,
     chat_with_policy,
     generate_roadmap,
+    simulate_compliance,
 )
 
 
@@ -67,6 +70,15 @@ class RoadmapRequest(BaseModel):
     policy_name: str
     department: str
     report: str
+
+class SimulationRequest(BaseModel):
+    policy_name: str
+    current_score: float
+    department: str  
+    training: int
+    documentation: int
+    audit_frequency: int
+    automation: int
 
 @app.get("/")
 def home():
@@ -128,3 +140,18 @@ async def generate_report(request: ReportRequest):
             "attachment; filename=Executive_Audit_Report.pdf"
         },
     )
+
+@app.post("/simulate-compliance")
+async def simulate(request: SimulationRequest):
+
+    result = simulate_compliance(
+        request.policy_name,
+        request.department,
+        request.current_score,
+        request.training,
+        request.documentation,
+        request.audit_frequency,
+        request.automation,
+    )
+
+    return result

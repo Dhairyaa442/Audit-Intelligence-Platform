@@ -120,3 +120,94 @@ Keep it concise and actionable.
     )
 
     return response.output_text
+
+def simulate_compliance(
+    policy_name,
+    department,
+    current_score,
+    training,
+    documentation,
+    audit_frequency,
+    automation,
+):
+    # Calculate predicted score locally
+    base_score = current_score
+
+    improvement = (
+        training * 0.30 +
+        documentation * 0.35 +
+        audit_frequency * 0.20 +
+        automation * 0.25
+    ) / 10
+
+    bonus = {
+        "Vendor Security Policy": 6,
+        "Litigation Response Policy": 2,
+        "Records Retention Policy": 3,
+        "Payroll Controls": 5,
+        "Employee Onboarding Policy": 4,
+        "Procurement Policy": 5,
+    }.get(policy_name, 3)
+
+    predicted_score = min(
+        100,
+        round(base_score + improvement + bonus)
+    )
+
+    prompt = f"""
+You are a Senior Compliance Auditor and AI Risk Consultant.
+
+A company wants to estimate how improvements to a policy will affect its compliance posture.
+
+Policy:
+{policy_name}
+
+Department:
+{department}
+
+Current Compliance Score:
+{current_score}%
+
+The predicted compliance score has ALREADY been calculated.
+
+Predicted Compliance Score:
+{predicted_score}%
+
+Planned Improvements:
+- Training Coverage: {training}%
+- Documentation Quality: {documentation}%
+- Audit Frequency: {audit_frequency}%
+- Automation Level: {automation}%
+
+DO NOT change the predicted compliance score.
+
+Based on the information above, estimate ONLY:
+
+1. Risk Level (Low, Medium, High, Critical)
+2. Expected Number of Critical Findings
+3. A short explanation (3–5 sentences).
+
+Return ONLY valid JSON in this format:
+
+{{
+  "predicted_score": {predicted_score},
+  "risk": "Medium",
+  "critical_findings": 1,
+  "explanation": "Explain why the score changes based on the planned improvements."
+}}
+"""
+
+    response = client.responses.create(
+        model="gpt-4.1-mini",
+        input=prompt,
+    )
+
+    import json
+
+    text = response.output_text.strip()
+    text = text.replace("```json", "").replace("```", "").strip()
+
+    print("RAW RESPONSE:")
+    print(text)
+
+    return json.loads(text)
