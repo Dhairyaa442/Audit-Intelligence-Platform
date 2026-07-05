@@ -25,6 +25,7 @@ import {
   TrendingUp,
   FileText,
   Loader2,
+  Sparkles,
 } from "lucide-react";
 
 type Policy = {
@@ -36,6 +37,7 @@ type Policy = {
 };
 
 export default function Home() {
+  const API = "http://127.0.0.1:8000";
   const [dashboard, setDashboard] = useState<any>(null);
   const [departments, setDepartments] = useState<any[]>([]);
   const [risks, setRisks] = useState<any[]>([]);
@@ -63,7 +65,7 @@ export default function Home() {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/analyze-policy",
+        `${API}/analyze-policy`,
         policy
       );
 
@@ -90,7 +92,7 @@ export default function Home() {
     setChatLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:8000/policy-chat", {
+      const res = await axios.post(`${API}/policy-chat`, {
         policy_name: selectedPolicy.policy_name,
         department: selectedPolicy.department,
         report: analysis,
@@ -128,7 +130,7 @@ export default function Home() {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/generate-roadmap",
+        `${API}/generate-roadmap`,
         {
           policy_name: selectedPolicy.policy_name,
           department: selectedPolicy.department,
@@ -151,7 +153,7 @@ const downloadReport = async () => {
   if (!selectedPolicy) return;
 
   const res = await axios.post(
-    "http://localhost:8000/generate-report",
+    `${API}/generate-report`,
     {
       policy_name: selectedPolicy.policy_name,
       department: selectedPolicy.department,
@@ -205,23 +207,28 @@ const runSimulation = async () => {
 
   setLoadingSimulation(true);
 
-  const res = await axios.post(
-    "http://localhost:8000/simulate-compliance",
-    {
-      policy_name: selectedPolicy.policy_name,
-      department: selectedPolicy.department,
-      current_score: selectedPolicy.compliance_score,
-      training,
-      documentation,
-      audit_frequency: auditFrequency,
-      automation,
-    }
-  );
+  try {
+    const res = await axios.post(
+      `${API}/simulate-compliance`,
+      {
+        policy_name: selectedPolicy.policy_name,
+        department: selectedPolicy.department,
+        current_score: selectedPolicy.compliance_score,
+        training,
+        documentation,
+        audit_frequency: auditFrequency,
+        automation,
+      }
+    );
 
-  setSimulation(res.data);
+    setSimulation(res.data);
 
-  setLoadingSimulation(false);
-  console.log(res.data);
+  } catch (err) {
+    console.error(err);
+    alert("Simulation failed.");
+  } finally {
+    setLoadingSimulation(false);
+  }
 };
 
 const getSeverity = (score: number) => {
@@ -267,9 +274,6 @@ useEffect(() => {
     .catch((err) => console.error(err));
 }, []);
 
-useEffect(() => {
-    setSimulation(null);
-}, [selectedPolicy]);
 
 useEffect(() => {
   if (!selectedPolicy) return;
@@ -941,7 +945,7 @@ return (
               AI Prediction
             </h3>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
 
               <div>
                 <p className="text-gray-500">
@@ -961,16 +965,35 @@ return (
                 <p className="text-3xl font-bold text-green-600">
                   {simulation.predicted_score}%
                 </p>
-              </div>
-
-              <div>
+                <div className="mt-2 h-2 rounded-full bg-gray-200">
+                  <div
+                    className={`h-2 rounded-full transition-all duration-500 ${
+                      simulation.predicted_score >= 80
+                        ? "bg-green-500"
+                        : simulation.predicted_score >= 60
+                        ? "bg-yellow-500"
+                        : "bg-red-500"
+                    }`}
+                    style={{ width: `${simulation.predicted_score}%` }}
+                  />
+                </div>
                 <p className="text-gray-500">
                   Risk Level
                 </p>
 
-                <p className="font-semibold">
+                <span
+                  className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold ${
+                    simulation.risk === "Low"
+                      ? "bg-green-100 text-green-700"
+                      : simulation.risk === "Medium"
+                      ? "bg-yellow-100 text-yellow-700"
+                      : simulation.risk === "High"
+                      ? "bg-orange-100 text-orange-700"
+                      : "bg-red-100 text-red-700"
+                  }`}
+                >
                   {simulation.risk}
-                </p>
+                </span>
               </div>
 
               <div>
@@ -978,24 +1001,40 @@ return (
                   Critical Findings
                 </p>
 
-                <p className="font-semibold">
+                <p
+                  className={`font-semibold ${
+                    simulation.critical_findings === 0
+                      ? "text-green-600"
+                      : simulation.critical_findings <= 2
+                      ? "text-yellow-600"
+                      : "text-red-600"
+                  }`}
+                >
                   {simulation.critical_findings}
+                </p>
+              </div>
+
+              <div>
+                <p className="text-gray-500">
+                  Improvement
+                </p>
+
+                <p className="text-2xl font-bold text-green-600">
+                  +{simulation.predicted_score - selectedPolicy!.compliance_score}%
                 </p>
               </div>
 
             </div>
 
-            <div className="mt-5 rounded-lg bg-slate-50 p-4">
-
-              <h4 className="font-semibold mb-2">
-                AI Explanation
-              </h4>
-
-              <p>
-                {simulation.explanation}
-              </p>
-
+            <div className="flex items-center gap-2 mb-1">
+                <Sparkles className="h-5 w-5 text-indigo-600" />
+                <h4 className="font-semibold text-lg">
+                    AI Explanation
+                </h4>
             </div>
+            <p className="leading-8 text-gray-800">
+                {simulation.explanation}
+            </p>
             
 
           </div>
