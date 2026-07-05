@@ -22,6 +22,7 @@ from app.services.ai_service import (
     chat_with_policy,
     generate_roadmap,
     simulate_compliance,
+    generate_actions,
 )
 
 
@@ -67,6 +68,11 @@ class ChatRequest(BaseModel):
     question: str
 
 class RoadmapRequest(BaseModel):
+    policy_name: str
+    department: str
+    report: str
+
+class ActionsRequest(BaseModel):
     policy_name: str
     department: str
     report: str
@@ -140,6 +146,17 @@ async def generate_report(request: ReportRequest):
             "attachment; filename=Executive_Audit_Report.pdf"
         },
     )
+
+@app.post("/generate-actions")
+async def actions(request: ActionsRequest):
+
+    result = generate_actions(
+        request.policy_name,
+        request.department,
+        request.report,
+    )
+
+    return result
 
 @app.post("/simulate-compliance")
 async def simulate(request: SimulationRequest):

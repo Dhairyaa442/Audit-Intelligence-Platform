@@ -211,3 +211,43 @@ Return ONLY valid JSON in this format:
     print(text)
 
     return json.loads(text)
+def generate_actions(policy_name, department, report):
+    import json
+
+    prompt = f"""
+You are a Senior Audit Compliance Consultant.
+
+Policy:
+{policy_name}
+
+Department:
+{department}
+
+Audit Report:
+{report}
+
+Generate exactly 5 concise actionable compliance recommendations.
+Each description should be no more than two short sentences.
+
+Return ONLY valid JSON.
+
+{{
+  "actions": [
+    {{
+      "priority": "High",
+      "title": "Improve Employee Training",
+      "description": "Conduct quarterly compliance training for all employees."
+    }}
+  ]
+}}
+"""
+
+    response = client.responses.create(
+        model="gpt-4.1-mini",
+        input=prompt,
+    )
+
+    text = response.output_text.strip()
+    text = text.replace("```json", "").replace("```", "").strip()
+
+    return json.loads(text)

@@ -48,6 +48,8 @@ export default function Home() {
   const [analysis, setAnalysis] = useState("");
   const [loadingAI, setLoadingAI] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [actions, setActions] = useState<any[]>([]);
+  const [loadingActions, setLoadingActions] = useState(false);
 
   const departmentColors: Record<string, string> = {
     Finance: "bg-green-100 text-green-700",
@@ -148,6 +150,26 @@ export default function Home() {
   };
 const [question, setQuestion] = useState("");
 const [chatLoading, setChatLoading] = useState(false);
+
+const generateActions = async () => {
+  if (!selectedPolicy) return;
+
+  setLoadingActions(true);
+
+  try {
+    const res = await axios.post(`${API}/generate-actions`, {
+      policy_name: selectedPolicy.policy_name,
+      department: selectedPolicy.department,
+      report: analysis,
+    });
+
+    setActions(res.data.actions);
+  } catch (err) {
+    console.error(err);
+  }
+
+  setLoadingActions(false);
+};
 
 const downloadReport = async () => {
   if (!selectedPolicy) return;
@@ -803,13 +825,65 @@ return (
                   ? "Generating..."
                   : "📋 Generate Remediation Roadmap"}
               </button>
-
               <button
                 onClick={downloadReport}
                 className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg font-medium"
               >
                 📄 Download Executive Report
               </button>
+
+              <button
+                  onClick={generateActions}
+                  className="rounded-lg bg-green-600 px-4 py-2 text-white"
+              >
+                  AI Recommendations
+              </button>
+              {actions.length > 0 && (
+                <div className="mt-4 rounded-lg border p-4">
+                    <h3 className="mb-3 text-xl font-semibold">
+                        AI Recommended Actions ({actions.length})
+                    </h3>
+
+                    {actions.map((item, index) => (
+                        <div
+                            key={index}
+                            className={`mb-3 rounded-lg border p-4 transition hover:shadow-md ${
+                                item.priority === "High"
+                                    ? "border-red-200"
+                                    : item.priority === "Medium"
+                                    ? "border-yellow-200"
+                                    : "border-green-200"
+                            }`}
+                      >
+                            <div className="flex items-center gap-2 mb-2">
+
+                              <span
+                                className={`rounded px-2 py-1 text-xs font-semibold ${
+                                  item.priority === "High"
+                                    ? "bg-red-100 text-red-700 border-red-200"
+                                    : item.priority === "Medium"
+                                    ? "bg-yellow-100 text-yellow-700 border-yellow-200"
+                                    : item.priority === "Low"
+                                    ? "bg-green-100 text-green-700 border-green-200"
+                                    : "bg-gray-100 text-gray-700"
+                                }`}
+                              >
+                                {item.priority}
+                              </span>
+
+                              <span className="font-semibold">
+                                {item.title}
+                              </span>
+
+                            </div>
+
+                            <p className="text-gray-600">
+                                {item.description}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+                )}
 
             </div>
 
