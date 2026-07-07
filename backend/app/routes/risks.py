@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from sqlalchemy import text
 from app.database.db import SessionLocal
+from app.services.ai_service import compare_policies_ai
 
 router = APIRouter()
 
@@ -32,3 +33,19 @@ def get_high_risk_policies():
     db.close()
 
     return risks
+
+@router.post("/compare-policy")
+def compare_policy(data: dict):
+
+    comparison = compare_policies_ai(
+        data["policy1_name"],
+        data["policy1_department"],
+        data["policy1_report"],
+        data["policy2_name"],
+        data["policy2_department"],
+        data["policy2_report"],
+    )
+
+    return {
+        "comparison": comparison
+    }

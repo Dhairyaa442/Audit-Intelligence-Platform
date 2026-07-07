@@ -1,5 +1,6 @@
 import os
 from urllib import response
+from click import prompt
 from openai import OpenAI
 
 client = OpenAI(
@@ -273,3 +274,69 @@ def generate_executive_summary(policy_name, department, report):
     except Exception as e:
         print(e)
         return None
+    
+
+def compare_policies_ai(
+    policy1_name,
+    policy1_department,
+    policy1_report,
+    policy2_name,
+    policy2_department,
+    policy2_report,
+):
+
+    prompt = f"""
+You are a Chief Audit Executive comparing two enterprise policies.
+
+Compare the policies from a business risk and compliance perspective.
+
+Policy A
+Name: {policy1_name}
+Department: {policy1_department}
+
+Audit Report:
+{policy1_report}
+
+--------------------------------
+
+Policy B
+Name: {policy2_name}
+Department: {policy2_department}
+
+Audit Report:
+{policy2_report}
+
+--------------------------------
+
+Return ONLY this format.
+
+Overall Assessment
+
+One paragraph comparing both policies.
+
+Higher Risk Policy
+
+State which policy has the higher enterprise risk and why.
+
+Key Differences
+
+• Difference 1
+• Difference 2
+• Difference 3
+
+Business Recommendation
+
+One paragraph describing which policy leadership should prioritize first and why.
+
+Do not use markdown.
+Do not repeat the reports.
+Keep under 220 words.
+"""
+
+    response = client.responses.create(
+        model="gpt-4.1-mini",
+        input=prompt,
+    )
+
+    return response.output_text.strip()
+

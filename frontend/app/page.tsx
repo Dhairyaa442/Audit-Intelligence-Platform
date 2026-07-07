@@ -52,6 +52,15 @@ export default function Home() {
   const [loadingActions, setLoadingActions] = useState(false);
   const [executiveSummary, setExecutiveSummary] = useState("");
   const [loadingSummary, setLoadingSummary] = useState(false);
+  const [comparison, setComparison] = useState("");
+  const [showComparison, setShowComparison] = useState(false);
+  const [comparePolicy, setComparePolicy] = useState<any>(null);
+  const [showCompareModal, setShowCompareModal] = useState(false);
+  const [secondPolicy, setSecondPolicy] = useState<any>(null);
+  const [comparisonResult, setComparisonResult] = useState("");
+  const [loadingComparison, setLoadingComparison] = useState(false);
+
+
 
   const departmentColors: Record<string, string> = {
     Finance: "bg-green-100 text-green-700",
@@ -173,6 +182,32 @@ const generateExecutiveSummary = async () => {
 
     setLoadingRoadmap(false);
   };
+
+const comparePolicies = async (policy1: any, policy2: any) => {
+  setLoadingComparison(true);
+
+  try {
+    const res = await axios.post(`${API}/compare-policy`, {
+      policy1_name: policy1.policy_name,
+      policy1_department: policy1.department,
+      policy1_report: analysis,
+
+      policy2_name: policy2.policy_name,
+      policy2_department: policy2.department,
+      policy2_report: analysis,
+    });
+
+    setComparisonResult(res.data.comparison);
+
+  } catch (err) {
+    console.error(err);
+    setComparisonResult("Comparison failed.");
+  }
+
+  setLoadingComparison(false);
+};
+
+
 const [question, setQuestion] = useState("");
 const [chatLoading, setChatLoading] = useState(false);
 
@@ -248,6 +283,7 @@ const [automation, setAutomation] = useState(60);
 
 const [simulation, setSimulation] = useState<any>(null);
 const [loadingSimulation, setLoadingSimulation] = useState(false);
+
 
 const runSimulation = async () => {
   if (!selectedPolicy) return;
@@ -386,7 +422,7 @@ if (!dashboard) {
   );
 }
 
-
+console.log("showCompareModal =", showCompareModal);
 return (
   <main className="min-h-screen bg-slate-100 p-8 text-black">
     <h1 className="text-4xl font-bold">
@@ -775,6 +811,18 @@ return (
                     >
                       AI Analyze
                     </button>
+                    <button
+                      onClick={() => {
+                        console.log("Compare clicked");
+                        setComparePolicy(risk);
+                        setShowModal(true); 
+                        setShowCompareModal(true);
+                        console.log("After setting:", true);
+                      }}
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-lg"
+                    >
+                      Compare
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -809,7 +857,6 @@ return (
               </p>
             </>
           )}
-
           {loadingAI ? (
             <div className="flex flex-col items-center justify-center py-16">
 
@@ -937,9 +984,120 @@ return (
                     ))}
                 </div>
                 )}
+              </div>
+                {showCompareModal && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[60]">
+                  <div className="bg-white rounded-2xl p-8 w-[900px] max-h-[90vh] overflow-y-auto my-10">
 
-            </div>
+                    <div className="flex justify-between items-center mb-6">
+                      <h2 className="text-2xl font-bold">
+                        AI Policy Comparison
+                      </h2>
 
+                      <button
+                        onClick={() => setShowCompareModal(false)}
+                        className="text-2xl"
+                      >
+                        ✕
+                      </button>
+                    </div>
+
+                    <div className="mt-5 mb-6 grid grid-cols-2 gap-5">
+                      <div className="rounded-xl border p-4 bg-blue-50">
+                        <p className="text-sm text-gray-500">Primary Policy</p>
+                        <p className="font-bold text-lg">
+                          {comparePolicy?.policy_name}
+                        </p>
+                        <p className="text-gray-500">
+                          {comparePolicy?.department}
+                        </p>
+                      </div>
+
+                      <div className="rounded-xl border p-4 bg-green-50">
+                        <p className="text-sm text-gray-500">Compared Policy</p>
+                        <p className="font-bold text-lg">
+                          {secondPolicy?.policy_name || "Not Selected"}
+                        </p>
+                        <p className="text-gray-500">
+                          {secondPolicy?.department || "-"}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mt-8">
+                      <label className="block mb-2 font-semibold">
+                        Select Policy to Compare
+                      </label>
+
+                      <select
+                        className="w-full rounded-lg border p-3"
+                        value={secondPolicy?.policy_id || ""}
+                        onChange={(e) => {
+                          const selected = risks.find(
+                            (r) => String(r.policy_id) === e.target.value
+                          );
+                          setSecondPolicy(selected);
+                        }}
+                      >
+                        <option value="">Select a policy...</option>
+
+                        {risks
+                          .filter((r) => r.policy_id !== comparePolicy?.policy_id)
+                          .map((r) => (
+                            <option key={r.policy_id} value={r.policy_id}>
+                              {r.policy_name}
+                            </option>
+                          ))}
+                      </select>
+
+                      <button
+                        onClick={() =>
+                          secondPolicy &&
+                          comparePolicies(comparePolicy, secondPolicy)
+                        }
+                        disabled={!secondPolicy || loadingComparison}
+                        className="mt-5 bg-blue-600 text-white px-5 py-2 rounded-lg disabled:opacity-50"
+                      >
+                        {loadingComparison ? (
+                          <span className="flex items-center gap-2">
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                            Comparing...
+                          </span>
+                        ) : (
+                          "Run AI Comparison"
+                        )}
+                      </button>
+                      <button
+                        onClick={() => {
+                          setSecondPolicy(null);
+                          setComparisonResult("");
+                        }}
+                        className="ml-3 px-5 py-2 rounded-lg border"
+                      >
+                        Reset
+                      </button>
+
+                      {comparisonResult && (
+                       <div className="mt-8 rounded-xl border border-slate-200 bg-slate-50 p-6">
+
+                        <h3 className="text-xl font-bold mb-5 flex items-center gap-2">
+                          <BrainCircuit className="text-blue-600" size={22} />
+                          AI Comparison Report
+                        </h3>
+
+                        <div className="prose max-w-none">
+                          <ReactMarkdown>
+                            {comparisonResult}
+                          </ReactMarkdown>
+                        </div>
+
+                      </div>
+                      )}
+                    </div>
+
+                  </div>
+                </div>
+              )}
             {loadingRoadmap && (
 
             <div className="mt-6 p-5 rounded-xl bg-green-50 border">

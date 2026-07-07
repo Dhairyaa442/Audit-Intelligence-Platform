@@ -92,6 +92,15 @@ class ExecutiveSummaryRequest(BaseModel):
     department: str
     report: str
 
+class ComparePoliciesRequest(BaseModel):
+    policy1_name: str
+    policy1_department: str
+    policy1_report: str
+
+    policy2_name: str
+    policy2_department: str
+    policy2_report: str
+
 @app.get("/")
 def home():
     return {
@@ -190,4 +199,20 @@ async def executive_summary(request: ExecutiveSummaryRequest):
 
     return {
         "summary": summary
+    }
+
+@app.post("/compare-policies")
+async def compare_policies(request: ComparePoliciesRequest):
+
+    result = compare_policies_ai(
+        request.policy1_name,
+        request.policy1_department,
+        request.policy1_report,
+        request.policy2_name,
+        request.policy2_department,
+        request.policy2_report,
+    )
+
+    return {
+        "comparison": result
     }
