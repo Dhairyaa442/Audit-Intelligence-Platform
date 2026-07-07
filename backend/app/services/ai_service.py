@@ -1,4 +1,5 @@
 import os
+from urllib import response
 from openai import OpenAI
 
 client = OpenAI(
@@ -251,3 +252,24 @@ Return ONLY valid JSON.
     text = text.replace("```json", "").replace("```", "").strip()
 
     return json.loads(text)
+
+def generate_executive_summary(policy_name, department, report):
+    try:
+        prompt = f"""
+        ...
+        Executive Recommendation
+        One concise paragraph explaining what leadership should prioritize next.
+        """
+
+        response = client.responses.create(
+            model="gpt-4.1-mini",
+            input=prompt,
+        )
+
+        summary = response.output_text.strip()
+
+        return summary
+
+    except Exception as e:
+        print(e)
+        return None

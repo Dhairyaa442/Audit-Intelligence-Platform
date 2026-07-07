@@ -50,6 +50,8 @@ export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const [actions, setActions] = useState<any[]>([]);
   const [loadingActions, setLoadingActions] = useState(false);
+  const [executiveSummary, setExecutiveSummary] = useState("");
+  const [loadingSummary, setLoadingSummary] = useState(false);
 
   const departmentColors: Record<string, string> = {
     Finance: "bg-green-100 text-green-700",
@@ -124,6 +126,29 @@ export default function Home() {
 
     setChatLoading(false);
   };
+
+const generateExecutiveSummary = async () => {
+    if (!selectedPolicy) return;
+
+    setLoadingSummary(true);
+
+    try {
+        const res = await axios.post(`${API}/executive-summary`, {
+            policy_name: selectedPolicy.policy_name,
+            department: selectedPolicy.department,
+            report: analysis,
+        });
+
+        console.log("Executive summary response:", res.data);
+
+        setExecutiveSummary(res.data.summary);
+
+    } catch (err) {
+        console.error(err);
+    }
+
+    setLoadingSummary(false);
+};
 
   const generateRoadmap = async () => {
     if (!selectedPolicy) return;
@@ -360,6 +385,7 @@ if (!dashboard) {
     </main>
   );
 }
+
 
 return (
   <main className="min-h-screen bg-slate-100 p-8 text-black">
@@ -831,6 +857,33 @@ return (
               >
                 📄 Download Executive Report
               </button>
+
+              <button
+                onClick={generateExecutiveSummary}
+                className="bg-green-600 text-white rounded-lg px-4 py-2"
+            >
+                📊 Executive Summary
+            </button>
+
+            {executiveSummary && (
+              <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 mt-5">
+
+                  <div className="mb-5">
+                      <h3 className="text-3xl font-bold">
+                          Executive Summary
+                      </h3>
+
+                      <p className="text-sm text-gray-500 mt-1">
+                          AI-generated executive briefing
+                      </p>
+                  </div>
+
+                  <div className="whitespace-pre-wrap leading-8 text-gray-700">
+                      {executiveSummary}
+                  </div>
+
+              </div>
+          )}
 
               <button
                   onClick={generateActions}

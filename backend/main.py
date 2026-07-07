@@ -23,6 +23,7 @@ from app.services.ai_service import (
     generate_roadmap,
     simulate_compliance,
     generate_actions,
+    generate_executive_summary,
 )
 
 
@@ -85,6 +86,11 @@ class SimulationRequest(BaseModel):
     documentation: int
     audit_frequency: int
     automation: int
+
+class ExecutiveSummaryRequest(BaseModel):
+    policy_name: str
+    department: str
+    report: str
 
 @app.get("/")
 def home():
@@ -172,3 +178,16 @@ async def simulate(request: SimulationRequest):
     )
 
     return result
+
+@app.post("/executive-summary")
+async def executive_summary(request: ExecutiveSummaryRequest):
+
+    summary = generate_executive_summary(
+        request.policy_name,
+        request.department,
+        request.report,
+    )
+
+    return {
+        "summary": summary
+    }
