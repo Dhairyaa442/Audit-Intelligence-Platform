@@ -163,7 +163,7 @@ http://localhost:3000
 
 ## Executive Dashboard
 
-![Executive Dashboard](screenshots/dashboard.png)
+![Executive Dashboard](screenshots/executive-dashboard.png)
 
 ---
 
