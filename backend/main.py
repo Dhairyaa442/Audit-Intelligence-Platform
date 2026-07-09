@@ -10,6 +10,7 @@ from app.routes.policies import router as policies_router
 from app.routes.risks import router as risks_router
 from app.routes.departments import router as departments_router
 from fastapi.middleware.cors import CORSMiddleware
+from app.services.ai_service import generate_regulation_mapping
 
 from app.routes.dashboard import router as dashboard_router
 
@@ -101,6 +102,17 @@ class ComparePoliciesRequest(BaseModel):
     policy2_department: str
     policy2_report: str
 
+
+from typing import Optional
+
+class RegulationMapRequest(BaseModel):
+    policy_name: str
+    department: str
+    description: Optional[str] = ""
+    critical_findings: int
+    compliance_score: float
+
+    
 @app.get("/")
 def home():
     return {
@@ -216,3 +228,9 @@ async def compare_policies(request: ComparePoliciesRequest):
     return {
         "comparison": result
     }
+
+
+@app.post("/ai/regulation-map")
+async def regulation_map(request: RegulationMapRequest):
+    report = generate_regulation_mapping(request.model_dump())
+    return {"report": report}

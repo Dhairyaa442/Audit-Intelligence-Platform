@@ -340,3 +340,124 @@ Keep under 220 words.
 
     return response.output_text.strip()
 
+def generate_regulation_mapping(policy: dict):
+
+    prompt = f"""
+You are a Senior Enterprise Compliance Auditor.
+
+Analyze the following enterprise policy.
+
+Policy Name:
+{policy.get("policy_name")}
+
+Department:
+{policy.get("department")}
+
+Description:
+{policy.get("description")}
+
+Critical Findings:
+{policy.get("critical_findings")}
+
+Compliance Score:
+{policy.get("compliance_score")}
+
+Return ONLY valid GitHub Markdown.
+
+Rules:
+- Return ONLY valid GitHub Markdown.
+- Do NOT include any introduction or conclusion.
+- Do NOT explain your reasoning.
+- Do NOT use code fences.
+- Use markdown headings only.
+- Use ONLY markdown tables.
+- Every framework MUST contain exactly 3 controls.
+- Notes must be one concise sentence (maximum 20 words).
+- Use these status values ONLY:
+  - 🟢 Compliant
+  - 🟡 Partial
+  - 🔴 Non-Compliant
+- Separate major sections with a horizontal rule (---).
+- Every section must appear exactly once.
+- Do not duplicate headings or content.
+
+Use EXACTLY this structure.
+## Executive Assessment
+
+Write exactly 2 concise sentences.
+
+Sentence 1:
+Summarize the policy's overall compliance posture.
+
+Sentence 2:
+Highlight the highest business or regulatory risk.
+
+## SOC2
+
+| Control | Status | Notes |
+|----------|--------|-------|
+| ... | ... | ... |
+| ... | ... | ... |
+| ... | ... | ... |
+
+## ISO 27001
+
+| Control | Status | Notes |
+|----------|--------|-------|
+| ... | ... | ... |
+| ... | ... | ... |
+| ... | ... | ... |
+
+## GDPR
+
+| Article | Status | Notes |
+|----------|--------|-------|
+| ... | ... | ... |
+| ... | ... | ... |
+| ... | ... | ... |
+
+## HIPAA
+
+| Requirement | Status | Notes |
+|-------------|--------|-------|
+| ... | ... | ... |
+| ... | ... | ... |
+| ... | ... | ... |
+
+## Overall Compliance Score
+
+### Estimated Score: **55/100**
+
+One sentence explaining the score.
+---
+
+## Highest Priority Gaps
+
+List exactly four bullet points ordered from highest to lowest risk.
+
+---
+"""
+
+    response = client.chat.completions.create(
+        model="gpt-4.1-mini",
+        temperature=0,
+        messages=[
+            {
+                "role": "system",
+                "content": """
+    You are an enterprise compliance expert.
+
+    Always return VALID GitHub Markdown only.
+    Never return plain text.
+    Never use code fences.
+    Always use markdown tables.
+    """
+            },
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ]
+    )
+
+    return response.choices[0].message.content

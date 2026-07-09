@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { LabelList } from "recharts";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 import {
   BarChart,
@@ -59,6 +60,9 @@ export default function Home() {
   const [secondPolicy, setSecondPolicy] = useState<any>(null);
   const [comparisonResult, setComparisonResult] = useState("");
   const [loadingComparison, setLoadingComparison] = useState(false);
+  const [loadingRegulation, setLoadingRegulation] = useState(false);
+  const [regulationReport, setRegulationReport] = useState("");
+  const [showRegulationModal, setShowRegulationModal] = useState(false);
 
 
 
@@ -205,6 +209,43 @@ const comparePolicies = async (policy1: any, policy2: any) => {
   }
 
   setLoadingComparison(false);
+};
+
+const generateRegulationMap = async () => {
+  if (!selectedPolicy) return;
+
+  setLoadingRegulation(true);
+  setRegulationReport("");
+
+  try {
+    const response = await fetch(
+      "http://127.0.0.1:8000/ai/regulation-map",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          policy_name: selectedPolicy.policy_name,
+          department: selectedPolicy.department,
+          description: "",
+          critical_findings: Number(selectedPolicy.critical_findings ?? 0),
+          compliance_score: Number(selectedPolicy.compliance_score ?? 0),
+        }),
+      }
+    );
+
+    const data = await response.json();
+    console.log(data);
+    setRegulationReport(data.report);
+
+    setShowRegulationModal(true);
+
+  } catch (err) {
+    console.error(err);
+  }
+
+  setLoadingRegulation(false);
 };
 
 
@@ -911,6 +952,27 @@ return (
             >
                 📊 Executive Summary
             </button>
+            <button
+            onClick={generateRegulationMap}
+            disabled={loadingRegulation}
+            className="bg-purple-600 hover:bg-purple-700 text-white px-5 py-3 rounded-lg font-medium disabled:opacity-50"
+          >
+            {loadingRegulation ? "Generating..." : "🛡️ Regulation Mapping"}
+          </button>
+
+          {regulationReport && (
+            <div className="mt-6 rounded-xl border border-purple-200 bg-purple-50 p-6">
+              <h3 className="text-xl font-bold mb-4">
+                🛡️ Regulation Mapping Report
+              </h3>
+
+              <div className="prose prose-sm max-w-none overflow-x-auto">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {regulationReport}
+                </ReactMarkdown>
+              </div>
+            </div>
+          )}
 
             {executiveSummary && (
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 mt-5">
