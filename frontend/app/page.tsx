@@ -63,6 +63,9 @@ export default function Home() {
   const [loadingRegulation, setLoadingRegulation] = useState(false);
   const [regulationReport, setRegulationReport] = useState("");
   const [showRegulationModal, setShowRegulationModal] = useState(false);
+  const [similarPolicies, setSimilarPolicies] = useState<any[]>([])
+  const [showSimilarPolicies, setShowSimilarPolicies] = useState(false)
+  const [loadingSimilarPolicies, setLoadingSimilarPolicies] = useState(false)
 
 
 
@@ -247,6 +250,35 @@ const generateRegulationMap = async () => {
 
   setLoadingRegulation(false);
 };
+
+const generateSimilarPolicies = async (policy: any) => {
+
+    setLoadingSimilarPolicies(true)
+
+    try {
+
+        const response = await axios.post(
+            "http://localhost:8000/similar-policies",
+            {
+                selected_policy: policy,
+                all_policies: risks
+            }
+        )
+
+        setSimilarPolicies(response.data.similar_policies)
+        setShowSimilarPolicies(true)
+
+    } catch (error) {
+
+        console.error(error)
+
+    } finally {
+
+        setLoadingSimilarPolicies(false)
+
+    }
+
+}
 
 
 const [question, setQuestion] = useState("");
@@ -973,6 +1005,47 @@ return (
               </div>
             </div>
           )}
+
+            <button
+                onClick={() => generateSimilarPolicies(selectedPolicy)}
+                className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg"
+            >
+
+            🔍 Similar Policies
+
+            </button>
+            {showSimilarPolicies && (
+              <div className="mt-6 rounded-xl border border-indigo-200 bg-indigo-50 p-6">
+                <h3 className="text-xl font-bold mb-4">
+                  🔍 Similar Policies
+                </h3>
+
+                <div className="space-y-4">
+                  {similarPolicies.map((item: any, index: number) => (
+                    <div
+                      key={index}
+                      className="bg-white rounded-lg shadow p-4 border"
+                    >
+                      <h4 className="font-semibold text-lg">
+                        {item.policy_name}
+                      </h4>
+
+                      <p>
+                        <strong>Department:</strong> {item.department}
+                      </p>
+
+                      <p>
+                        <strong>Similarity:</strong> {item.similarity}%
+                      </p>
+
+                      <p className="mt-2 text-gray-700">
+                        {item.reason}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {executiveSummary && (
               <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 mt-5">

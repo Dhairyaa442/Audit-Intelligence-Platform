@@ -461,3 +461,79 @@ List exactly four bullet points ordered from highest to lowest risk.
     )
 
     return response.choices[0].message.content
+
+import json
+
+def find_similar_policies(selected_policy, all_policies):
+
+    prompt = f"""
+You are a senior enterprise compliance consultant.
+
+Your task is to compare ONE selected policy with all the other enterprise policies.
+
+Selected Policy
+
+Name:
+{selected_policy["policy_name"]}
+
+Department:
+{selected_policy["department"]}
+
+Compliance Score:
+{selected_policy["compliance_score"]}
+
+Critical Findings:
+{selected_policy["critical_findings"]}
+
+---------------------------------------
+
+Other Policies
+
+{json.dumps(all_policies, indent=2)}
+
+---------------------------------------
+
+Return ONLY valid JSON.
+
+Return the FIVE most similar policies.
+
+Similarity is based on:
+
+- Business purpose
+- Compliance objectives
+- Department overlap
+- Risk profile
+- Audit findings
+
+Return exactly this JSON.
+
+{{
+  "similar_policies":[
+    {{
+      "policy_name":"Vendor Security Policy",
+      "department":"IT",
+      "similarity":92,
+      "reason":"Both policies govern access management and security controls."
+    }}
+  ]
+}}
+
+Rules:
+
+- Never include the selected policy.
+- Similarity must be between 0-100.
+- Return exactly five policies.
+- Reason must be one sentence.
+"""
+
+    response = client.responses.create(
+        model="gpt-4.1-mini",
+        input=prompt,
+    )
+
+    text = response.output_text.strip()
+
+    text = text.replace("```json", "")
+    text = text.replace("```", "")
+
+    return json.loads(text)

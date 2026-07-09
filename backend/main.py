@@ -11,6 +11,7 @@ from app.routes.risks import router as risks_router
 from app.routes.departments import router as departments_router
 from fastapi.middleware.cors import CORSMiddleware
 from app.services.ai_service import generate_regulation_mapping
+from app.services.ai_service import find_similar_policies
 
 from app.routes.dashboard import router as dashboard_router
 
@@ -33,6 +34,11 @@ app = FastAPI(
     version="1.0.0"
 )
 
+class SimilarPoliciesRequest(BaseModel):
+
+    selected_policy: dict
+
+    all_policies: list
 
 class Policy(BaseModel):
     policy_id: str
@@ -112,7 +118,7 @@ class RegulationMapRequest(BaseModel):
     critical_findings: int
     compliance_score: float
 
-    
+
 @app.get("/")
 def home():
     return {
@@ -234,3 +240,14 @@ async def compare_policies(request: ComparePoliciesRequest):
 async def regulation_map(request: RegulationMapRequest):
     report = generate_regulation_mapping(request.model_dump())
     return {"report": report}
+
+
+@app.post("/similar-policies")
+async def similar_policies(request: SimilarPoliciesRequest):
+
+    result = find_similar_policies(
+        request.selected_policy,
+        request.all_policies,
+    )
+
+    return result
